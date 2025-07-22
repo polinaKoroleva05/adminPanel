@@ -1,27 +1,27 @@
-// import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
-import type {UserInterface} from '@/shared/model/types';
+import {getUserQueryMiddleware} from '@/app/taskStore/userQueryMiddleware';
+import type {UserCreateInterface, UserInterface} from '@/shared/model/types';
 import {UserDetailsMantine} from '@widgets/userDetails';
 import {Route, Routes, useNavigate} from 'react-router';
 import styles from './createUserPage.module.css';
 
-export default function NewTaskPage() {
+export default function CreateUserPage() {
     const navigate = useNavigate();
     const emptyUser: UserInterface = {
-        id: 3,
-        name: 'string',
+        id: '',
+        name: '',
         surName: 'string',
         password: 'string',
         fullName: 'string',
         email: 'string',
         birthDate: '2025-07-16T20:58:15.998Z',
-        telephone: 'string',
+        telephone: undefined,
         employment: 'string',
         userAgreement: true
     };
-    // const {createTaskMutation} = getTaskQueryMiddleware();
-    function handleCreateTask(userData: UserInterface) {
+    const {createUserMutation} = getUserQueryMiddleware();
+    function handleCreateTask(userData: UserCreateInterface) {
         console.log('handle create', userData)
-        // createTaskMutation(userData);
+        createUserMutation(userData);
         navigate('/');
     }
     return (

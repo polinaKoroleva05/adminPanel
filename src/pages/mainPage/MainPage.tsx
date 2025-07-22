@@ -15,7 +15,7 @@ import {TaskList} from '@widgets/taskList';
 import {Carousel} from '@mantine/carousel';
 import styles from './mainPage.module.css';
 import SearchIcon from '@shared/ui/search.svg?react';
-import {useTasksQuery} from '@store/useTasksQuery';
+import {useTasksQuery} from '@/app/taskStore/useUsersQuery';
 import {useNavigate} from 'react-router';
 import {useToggle} from '@mantine/hooks';
 import SortAscIcon from '@shared/ui/sortAsc.svg?react';

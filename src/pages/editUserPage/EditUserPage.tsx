@@ -1,44 +1,29 @@
 import {Route, Routes, useNavigate, useParams} from 'react-router';
 import {UserDetailsMantine} from '@widgets/userDetails';
-import type {TaskInterface, UserInterface} from '@/shared/model/types';
-import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
-import {useIdTaskQuery} from '@store/useIdTaskQuery';
+import type {TaskInterface, UserCreateInterface, UserInterface} from '@/shared/model/types';
+import {getUserQueryMiddleware} from '@/app/taskStore/userQueryMiddleware';
+import {useIdUserQuery} from '@/app/taskStore';
 import {Loader} from '@mantine/core';
 import styles from './editUserPage.module.css';
 
-export default function EditTaskPage() {
+export default function EditUserPage() {
     const navigate = useNavigate();
     const {id} = useParams();
-    // const {data: currentTask, isLoading} = useIdTaskQuery(Number(id));
-    // const {updateTaskMutation} = getTaskQueryMiddleware();
-    // if (isLoading) {
-    //     return <Loader />;
-    // }
-    // if (!currentTask) {
-    //     return <p> Not Found :c </p>;
-    // }
-    const currentUser: UserInterface = {
-        id: 3,
-        name: 'string',
-        surName: 'string',
-        password: 'string',
-        fullName: 'string',
-        email: 'string',
-        birthDate: '2025-07-16T20:58:15.998Z',
-        telephone: 'string',
-        employment: 'string',
-        userAgreement: true
-    };
-    function handleEditUser(userData: UserInterface) {
-        // let patchData: Partial<TaskInterface> = {}; //только измененные данные
-        // for (let field in taskData) {
-        //     if (taskData[field] !== currentTask[field]) {
-        //         patchData[field] = taskData[field];
-        //     }
-        // }
-        // if (Object.keys(patchData).length) {
-        //     updateTaskMutation({id: Number(id), newTask: patchData});
-        // }
+    if(!id){
+        return <p> Not Found :c </p>;
+    }
+    const {data: currentUser, isLoading} = useIdUserQuery(id);
+    const {editUserMutation} = getUserQueryMiddleware();
+    console.log(currentUser)
+    if (isLoading) {
+        return <Loader />;
+    }
+    if (!currentUser) {
+        return <p> Not Found :c </p>;
+    }
+    function handleEditUser(userData: UserCreateInterface) {
+        const { password, email, ...userEditData } = userData
+        editUserMutation({id: id!, dataUser: userEditData})
         console.log('handleEditUser', userData)
         navigate('/');
     }

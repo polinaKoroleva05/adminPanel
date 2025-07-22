@@ -5,7 +5,7 @@ import EditIcon from '@shared/ui/edit.svg?react';
 import {useNavigate} from 'react-router';
 import DeleteIcon from '@shared/ui/delete.svg?react';
 import {format} from 'date-fns';
-import {getTaskQueryMiddleware} from '@store/taskQueryMiddleware';
+import {getTaskQueryMiddleware} from '@/app/taskStore/userQueryMiddleware';
 import {modals} from '@mantine/modals';
 
 const PriorityMap = {

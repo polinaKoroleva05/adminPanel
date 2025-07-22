@@ -14,6 +14,8 @@ import {ModalsProvider} from '@mantine/modals';
 import {MainUsersPage} from '@pages/mainUsersPage';
 import {UsersTable} from '@widgets/usersTable';
 import { EditUserPage } from '@/pages/editUserPage';
+import { LoginPage } from '@pages/loginPage';
+import AllUsersPage from '@/pages/allUsersPage/AllUsersPage';
 
 function App() {
     return (
@@ -22,9 +24,9 @@ function App() {
                 <QueryClientProvider client={client}>
                     <Routes>
                         <Route path='/' element={<MainUsersPage />}>
-                            <Route path='/' element={<UsersTable />} />
+                            <Route path='/' element={<AllUsersPage />} />
                             <Route
-                                path='/user/edit/*'
+                                path='/user/edit/:id/*'
                                 element={<EditUserPage/>}
                             />
                             <Route
@@ -32,7 +34,7 @@ function App() {
                                 element={<CreateUserPage/>}
                             />
                         </Route>
-                        <Route path='/login' element={<p>login</p>} />
+                        <Route path='/login' element={<LoginPage/>} />
                     </Routes>
                 </QueryClientProvider>
             </ModalsProvider>

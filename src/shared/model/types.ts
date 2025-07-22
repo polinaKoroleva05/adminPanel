@@ -1,6 +1,6 @@
-type Category = 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test'
-type Status = 'To Do' | 'In Progress' | 'Done'
-type Priority = 'Low' | 'Medium' | 'High'
+type Category = 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
+type Status = 'To Do' | 'In Progress' | 'Done';
+type Priority = 'Low' | 'Medium' | 'High';
 
 /**
  * @param {number | null} id - The id of task. Id = null, when client send new data to server. Server always send data with correct id.
@@ -12,19 +12,19 @@ type Priority = 'Low' | 'Medium' | 'High'
  * @param {number | null} date - The date of creation task. Date = null, when client send new data to server. Server always send data with correct date.
  */
 export interface TaskInterface {
-    [key: string]: string | number | undefined | null
-    id: number | null,
+    [key: string]: string | number | undefined | null;
+    id: number | null;
     title: string;
     description?: string;
     category: Category;
     status: Status;
     priority: Priority;
-    date: number | null
+    date: number | null;
 }
 
 export interface UserInterface {
-    [key: string]: string | number | undefined | null | boolean
-    id: number | null,
+    [key: string]: string | number | undefined | null | boolean;
+    id: string;
     name: string;
     surName: string;
     password: string;
@@ -33,5 +33,27 @@ export interface UserInterface {
     birthDate?: string;
     telephone?: string;
     employment?: string;
-    userAgreement?: boolean; 
+    userAgreement?: boolean;
+}
+
+export interface UserCreateInterface {
+    [key: string]: string | number | undefined | null | boolean;
+    name: string;
+    surName: string;
+    password: string;
+    fullName: string;
+    email: string;
+    birthDate?: string;
+    telephone?: string;
+}
+
+export interface UserPatchInterface {
+    [key: string]: string | number | undefined | null | boolean;
+    name: string;
+    surName: string;
+    fullName: string;
+    birthDate?: string;
+    telephone?: string;
+    employment?: string;
+    userAgreement?: boolean;
 }

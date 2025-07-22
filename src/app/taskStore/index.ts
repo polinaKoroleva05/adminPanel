@@ -1,3 +1,3 @@
-export {getTaskQueryMiddleware} from './taskQueryMiddleware'
-export {useIdTaskQuery} from './useIdTaskQuery'
-export {useTasksQuery} from './useTasksQuery'
+export {getUserQueryMiddleware} from './userQueryMiddleware'
+export {useIdUserQuery} from './useIdUserQuery'
+export {useUsersQuery} from './useUsersQuery'

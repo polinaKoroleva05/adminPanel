@@ -1,4 +1,8 @@
-import type {TaskInterface, UserInterface} from '@shared/model/types';
+import type {
+    TaskInterface,
+    UserCreateInterface,
+    UserInterface
+} from '@shared/model/types';
 import {
     Button,
     Group,
@@ -29,14 +33,13 @@ export default function userDetailsMantine({
     editMode
 }: {
     currentUser: UserInterface;
-    onSubmitProp: (userData: UserInterface) => void;
+    onSubmitProp: (userData: UserCreateInterface) => void;
     onCancelProp: () => void;
     editMode: boolean;
 }) {
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
-            id: currentUser.id,
             name: currentUser.name,
             surName: currentUser.surName,
             password: currentUser.password,
@@ -50,7 +53,23 @@ export default function userDetailsMantine({
 
         validate: {
             name: (value) =>
-                value.length < 64 ? null : "Name can't be more 64 symbols"
+                value.length < 64 && value.length > 0
+                    ? null
+                    : "Name can't be empty and more 64 symbols",
+            surName: (value) =>
+                value.length < 64 && value.length > 0
+                    ? null
+                    : "Surname can't be empty and more 64 symbols",
+            password: (value) =>
+                value.length > 0
+                    ? null
+                    : "Password can't be empty",
+            email: (value) =>
+                /^\S+@\S+$/.test(value) ? null : 'Invalid email',
+            telephone: (value) =>
+                value == undefined || /^(\+7|8)[89]\d{9}$/.test(value)
+                    ? null
+                    : 'Invalid telephone' //если телефон не определен, то регулярка выполнится с true
         }
     });
     return (

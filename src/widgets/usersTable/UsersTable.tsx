@@ -1,55 +1,47 @@
-import {Table} from '@mantine/core';
+import { getUserQueryMiddleware } from '@/app/taskStore';
+import {Button, Table} from '@mantine/core';
 import type {UserInterface} from '@shared/model/types';
+import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router';
 
-export default function UsersTable() {
-    const elements: UserInterface[] = [
-        {
-            id: 1,
-            name: 'string',
-            surName: 'string',
-            password: 'string',
-            fullName: 'string',
-            email: 'string',
-            birthDate: '2025-07-16T20:58:15.998Z',
-            telephone: 'string',
-            employment: 'string',
-            userAgreement: true
-        },
-                {
-            id: 2,
-            name: 'name',
-            surName: 'string',
-            password: 'password',
-            fullName: 'fullName',
-            email: 'email',
-            birthDate: '2025-07-16T20:58:15.998Z',
-            telephone: 'telephone',
-            employment: 'employment',
-            userAgreement: false
-        },
-                {
-            id: 3,
-            name: 'string',
-            surName: 'string',
-            password: 'string',
-            fullName: 'string',
-            email: 'string',
-            birthDate: '2025-07-16T20:58:15.998Z',
-            telephone: 'string',
-            employment: 'string',
-            userAgreement: true
-        }
-    ];
-    const rows = elements.map((element) => (
-        <Table.Tr key={element.id}>
-            <Table.Td>{element.id}</Table.Td>
-            <Table.Td>{element.name}</Table.Td>
-            <Table.Td>{element.surName}</Table.Td>
-            <Table.Td>{element.fullName}</Table.Td>
-            <Table.Td>{element.birthDate}</Table.Td>
-            <Table.Td>{element.telephone}</Table.Td>
-            <Table.Td>{element.employment}</Table.Td>
-            <Table.Td>{element.userAgreement ? 'yes' : 'no'}</Table.Td>
+export default function UsersTable({users}: {users: UserInterface[]}) {
+    const navigate = useNavigate()
+    const {deleteUserMutation} = getUserQueryMiddleware();
+    console.log(users);
+    function onEdit(id: string) {
+        navigate(`/user/edit/${id}/mantine`)
+    }
+    function onDelete(id: string) {
+        deleteUserMutation(id)
+    }
+    const rows = users.map((user) => (
+        <Table.Tr key={user.id}>
+            <Table.Td>{user.id}</Table.Td>
+            <Table.Td>{user.name}</Table.Td>
+            <Table.Td>{user.surName}</Table.Td>
+            <Table.Td>{user.fullName}</Table.Td>
+            <Table.Td>
+                {user.birthDate ? user.birthDate : 'Not specified'}
+            </Table.Td>
+            <Table.Td>
+                {user.telephone ? user.telephone : 'Not specified'}
+            </Table.Td>
+            <Table.Td>
+                {user.employment ? user.employment : 'Not specified'}
+            </Table.Td>
+            <Table.Td>
+                {user.userAgreement
+                    ? 'Yes'
+                    : user.userAgreement != undefined
+                      ? 'No'
+                      : 'Not specified'}
+            </Table.Td>
+            <Table.Td>
+                <Button onClick={()=>onEdit(user.id)}>ed</Button>
+            </Table.Td>
+            <Table.Td>
+                <Button onClick={()=>onDelete(user.id)}>del</Button>
+            </Table.Td>
         </Table.Tr>
     ));
 

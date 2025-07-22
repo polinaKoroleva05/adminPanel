@@ -1,10 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
-import {getIdTaskService} from '@store/taskService';
+import {UserService} from '@/app/api';
 
-export const useIdTaskQuery = (id: number) => {
+export const useIdUserQuery = (id: string) => {
     return useQuery({
-        queryFn: () => getIdTaskService(id),
-        queryKey: ['task', id],
+        queryFn: () => UserService.getById(id),
+        queryKey: ['user', id],
         staleTime: 5000,
         retry: (failureCount, error) => {
             console.log(error)

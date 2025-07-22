@@ -1,6 +1,6 @@
-import {AppShell, Burger, Group, Text} from '@mantine/core';
+import {AppShell, Burger, Group} from '@mantine/core';
 import {useDisclosure} from '@mantine/hooks';
-import {Outlet, Route, Routes} from 'react-router';
+import {Link, Outlet} from 'react-router';
 
 export default function MainUsersPage() {
     const [mobileOpened, {toggle: toggleMobile}] = useDisclosure();
@@ -30,21 +30,16 @@ export default function MainUsersPage() {
                         visibleFrom='sm'
                         size='sm'
                     />
-                    The burger icon is always visible
+                    Admin Panel Siriur
                 </Group>
             </AppShell.Header>
             <AppShell.Navbar p='md'>
-                Navbar is collapsed on mobile at sm breakpoint. At that point it
-                is no longer offset by padding in the main element and it takes
-                the full width of the screen when opened.
+                <Link to="/">Main</Link>
+                <Link to="/user/edit/mantine">edit mantine</Link>
+                <Link to="/user/create/mantine">create mantine</Link>
             </AppShell.Navbar>
             <AppShell.Main>
                 <Outlet />
-                <Text>This is the main section, your app content here.</Text>
-                <Text>
-                    Layout used in most cases – Navbar and Header with fixed
-                    position
-                </Text>
             </AppShell.Main>
         </AppShell>
     );
