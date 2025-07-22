@@ -24,7 +24,6 @@ export default function EditUserPage() {
     function handleEditUser(userData: UserCreateInterface) {
         const { password, email, ...userEditData } = userData
         editUserMutation({id: id!, dataUser: userEditData})
-        console.log('handleEditUser', userData)
         navigate('/');
     }
     return (

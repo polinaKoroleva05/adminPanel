@@ -13,11 +13,14 @@ export default function CreateUserPage() {
         password: '',
         fullName: '',
         email: '',
+        employment: 'Workman',
+        userAgreement: false
     };
     const {createUserMutation} = getUserQueryMiddleware();
-    function handleCreateTask(userData: UserCreateInterface) {
-        console.log('handle create', userData)
-        createUserMutation(userData);
+    function handleCreateUser(userData: UserCreateInterface) {
+        const { confirmPassword, ...userCreateData } = userData
+        console.log('handle create', userCreateData)
+        createUserMutation(userCreateData);
         navigate('/');
     }
     return (
@@ -28,7 +31,7 @@ export default function CreateUserPage() {
                     element={
                         <UserDetailsMantine
                             currentUser={emptyUser}
-                            onSubmitProp={handleCreateTask}
+                            onSubmitProp={handleCreateUser}
                             onCancelProp={() => navigate('/')}
                             editMode={false}
                         />

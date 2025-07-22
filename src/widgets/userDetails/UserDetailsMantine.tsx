@@ -1,14 +1,12 @@
-import type {
-    UserCreateInterface,
-    UserInterface
-} from '@shared/model/types';
+import type {UserCreateInterface, UserInterface} from '@shared/model/types';
 import {
     Button,
     Group,
     TextInput,
     Paper,
     Select,
-    Checkbox
+    Checkbox,
+    PasswordInput
 } from '@mantine/core';
 import {DatePickerInput} from '@mantine/dates';
 import {useForm} from '@mantine/form';
@@ -39,6 +37,7 @@ export default function userDetailsMantine({
             name: currentUser.name,
             surName: currentUser.surName,
             password: currentUser.password,
+            confirmPassword: currentUser.password,
             fullName: currentUser.fullName,
             email: currentUser.email,
             birthDate: currentUser.birthDate,
@@ -60,6 +59,9 @@ export default function userDetailsMantine({
                 value == undefined || value.length > 0
                     ? null
                     : "Password can't be empty",
+            confirmPassword: (value, values) =>
+                value === values.password ? null : 'Password did not match',
+
             email: (value) =>
                 /^\S+@\S+$/.test(value) ? null : 'Invalid email',
             telephone: (value) =>
@@ -68,21 +70,27 @@ export default function userDetailsMantine({
                     : 'Invalid telephone' //если телефон не определен, то регулярка выполнится с true
         }
     });
-    function handleNameChange(event: React.ChangeEvent<HTMLInputElement>){
+    function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         // form.setFieldValue('name', event.currentTarget.value);
-        form.setFieldValue('fullName', event.currentTarget.value + ' ' + form.getValues().surName);
+        form.setFieldValue(
+            'fullName',
+            event.currentTarget.value + ' ' + form.getValues().surName
+        );
     }
 
-    function handleBlurName(event: React.ChangeEvent<HTMLInputElement>){
+    function handleBlurName(event: React.ChangeEvent<HTMLInputElement>) {
         form.setFieldValue('name', event.currentTarget.value);
     }
 
-    function handleSurNameChange(event: React.ChangeEvent<HTMLInputElement>){
+    function handleSurNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         // form.setFieldValue('surName', event.currentTarget.value);
-        form.setFieldValue('fullName', form.getValues().name + ' ' + event.currentTarget.value);
+        form.setFieldValue(
+            'fullName',
+            form.getValues().name + ' ' + event.currentTarget.value
+        );
     }
 
-        function handleBlurSurName(event: React.ChangeEvent<HTMLInputElement>){
+    function handleBlurSurName(event: React.ChangeEvent<HTMLInputElement>) {
         form.setFieldValue('surName', event.currentTarget.value);
     }
 
@@ -111,13 +119,22 @@ export default function userDetailsMantine({
                     key={form.key('fullName')}
                     {...form.getInputProps('fullName')}
                 />
-                {!editMode && <TextInput
-                    disabled={editMode}
-                    withAsterisk
-                    label='Password'
-                    key={form.key('password')}
-                    {...form.getInputProps('password')}
-                />}
+                {!editMode && (
+                    <>
+                        <PasswordInput
+                            withAsterisk
+                            label='Password'
+                            key={form.key('password')}
+                            {...form.getInputProps('password')}
+                        />
+                        <PasswordInput
+                            withAsterisk
+                            label='Confirm password'
+                            key={form.key('confirmPassword')}
+                            {...form.getInputProps('confirmPassword')}
+                        />
+                    </>
+                )}
                 <TextInput
                     disabled={editMode}
                     withAsterisk
@@ -137,10 +154,10 @@ export default function userDetailsMantine({
                 />
                 <Select
                     searchable
-                    label='Employment '
-                    key={form.key('employment ')}
-                    {...form.getInputProps('employment ')}
-                    data={['React', 'Angular', 'Vue', 'Svelte']}
+                    label='Employment'
+                    key={form.key('employment')}
+                    {...form.getInputProps('employment')}
+                    data={['Сleaner', 'Admin', 'Director', 'Workman']}
                 />
                 <Checkbox
                     label='User agreement'
