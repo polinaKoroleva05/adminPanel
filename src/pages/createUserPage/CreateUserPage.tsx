@@ -9,14 +9,10 @@ export default function CreateUserPage() {
     const emptyUser: UserInterface = {
         id: '',
         name: '',
-        surName: 'string',
-        password: 'string',
-        fullName: 'string',
-        email: 'string',
-        birthDate: '2025-07-16T20:58:15.998Z',
-        telephone: undefined,
-        employment: 'string',
-        userAgreement: true
+        surName: '',
+        password: '',
+        fullName: '',
+        email: '',
     };
     const {createUserMutation} = getUserQueryMiddleware();
     function handleCreateTask(userData: UserCreateInterface) {

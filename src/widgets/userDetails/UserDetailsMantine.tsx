@@ -57,7 +57,7 @@ export default function userDetailsMantine({
                     ? null
                     : "Surname can't be empty and more 64 symbols",
             password: (value) =>
-                value.length > 0
+                value == undefined || value.length > 0
                     ? null
                     : "Password can't be empty",
             email: (value) =>
@@ -68,6 +68,24 @@ export default function userDetailsMantine({
                     : 'Invalid telephone' //если телефон не определен, то регулярка выполнится с true
         }
     });
+    function handleNameChange(event: React.ChangeEvent<HTMLInputElement>){
+        // form.setFieldValue('name', event.currentTarget.value);
+        form.setFieldValue('fullName', event.currentTarget.value + ' ' + form.getValues().surName);
+    }
+
+    function handleBlurName(event: React.ChangeEvent<HTMLInputElement>){
+        form.setFieldValue('name', event.currentTarget.value);
+    }
+
+    function handleSurNameChange(event: React.ChangeEvent<HTMLInputElement>){
+        // form.setFieldValue('surName', event.currentTarget.value);
+        form.setFieldValue('fullName', form.getValues().name + ' ' + event.currentTarget.value);
+    }
+
+        function handleBlurSurName(event: React.ChangeEvent<HTMLInputElement>){
+        form.setFieldValue('surName', event.currentTarget.value);
+    }
+
     return (
         <Paper className={styles.form} shadow='md' radius='md'>
             <form onSubmit={form.onSubmit(onSubmitProp)}>
@@ -76,12 +94,16 @@ export default function userDetailsMantine({
                     label='Name'
                     key={form.key('name')}
                     {...form.getInputProps('name')}
+                    onChange={handleNameChange}
+                    onBlur={handleBlurName}
                 />
                 <TextInput
                     withAsterisk
                     label='Surname'
                     key={form.key('surName')}
                     {...form.getInputProps('surName')}
+                    onChange={handleSurNameChange}
+                    onBlur={handleBlurSurName}
                 />
                 <TextInput
                     withAsterisk
@@ -89,13 +111,13 @@ export default function userDetailsMantine({
                     key={form.key('fullName')}
                     {...form.getInputProps('fullName')}
                 />
-                <TextInput
+                {!editMode && <TextInput
                     disabled={editMode}
                     withAsterisk
                     label='Password'
                     key={form.key('password')}
                     {...form.getInputProps('password')}
-                />
+                />}
                 <TextInput
                     disabled={editMode}
                     withAsterisk

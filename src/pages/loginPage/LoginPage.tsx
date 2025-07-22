@@ -1,6 +1,6 @@
 import {useForm} from '@mantine/form';
 import styles from './loginPage.module.css';
-import {Button, Paper, TextInput} from '@mantine/core';
+import {Button, Paper, TextInput, Text} from '@mantine/core';
 import {getAuthQueryMiddleware, useAuthContext} from '@/app/taskStore';
 import {useNavigate} from 'react-router';
 import { useEffect } from 'react';
@@ -37,6 +37,9 @@ export default function LoginPage() {
     return (
         <div className={styles.page}>
             <Paper className={styles.form} shadow='md' radius='md'>
+                <Text fw={500} ta="center">
+                    Please log in
+                </Text>
                 <form onSubmit={form.onSubmit(onLogin)}>
                     <TextInput
                         label='Email'
@@ -49,7 +52,7 @@ export default function LoginPage() {
                         {...form.getInputProps('password')}
                     />
 
-                    <Button type='submit'>Login</Button>
+                    <Button className={styles.button} type='submit'>Login</Button>
                 </form>
             </Paper>
         </div>

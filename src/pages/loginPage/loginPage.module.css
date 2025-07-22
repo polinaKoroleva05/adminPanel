@@ -12,3 +12,7 @@
     border-radius: 6px;
     border: 1px solid var(--mantine-color-disabled-border);
 }
+
+.button{
+    margin-top: 2vh;
+}
