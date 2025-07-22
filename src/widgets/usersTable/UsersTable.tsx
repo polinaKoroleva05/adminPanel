@@ -1,20 +1,37 @@
 import {getUserQueryMiddleware} from '@/app/taskStore';
-import {Button, Table} from '@mantine/core';
+import {Button, Table, Text} from '@mantine/core';
 import type {UserInterface} from '@shared/model/types';
 import {useNavigate} from 'react-router';
 import DeleteIcon from '@shared/ui/delete.svg?react';
 import EditIcon from '@shared/ui/edit.svg?react';
 import styles from './usersTable.module.css';
+import { modals } from '@mantine/modals';
 
 export default function UsersTable({users}: {users: UserInterface[]}) {
     const navigate = useNavigate();
     const {deleteUserMutation} = getUserQueryMiddleware();
     console.log(users);
+    const openDeleteModal = (id: string) =>
+        modals.openConfirmModal({
+            title: 'Please confirm your action',
+            children: (
+                <Text size='sm'>
+                    Are you sure you want to delete the user? This action
+                    cannot be undone.
+                </Text>
+            ),
+            labels: {confirm: 'Delete', cancel: 'Cancel'},
+            confirmProps: {color: 'red'},
+            onCancel: () => console.log('Cancel'),
+            onConfirm: () => deleteUserMutation(id)
+        });
+
     function onEdit(id: string) {
         navigate(`/user/edit/${id}/mantine`);
     }
-    function onDelete(id: string) {
-        deleteUserMutation(id);
+    function onDelete(event: any, id: string) {
+        event.stopPropagation();
+        openDeleteModal(id);
     }
     const rows = users.map((user) => (
         <Table.Tr key={user.id}>
@@ -55,7 +72,7 @@ export default function UsersTable({users}: {users: UserInterface[]}) {
                     color='#8c8c8cff'
                     size='xs'
                     radius='sm'
-                    onClick={() => onDelete(user.id)}
+                    onClick={(event) => onDelete(event, user.id)}
                 >
                     <DeleteIcon className={styles.iconDelete} />
                 </Button>
@@ -64,7 +81,14 @@ export default function UsersTable({users}: {users: UserInterface[]}) {
     ));
 
     return (
-        <Table className={styles.table} highlightOnHover withTableBorder striped withColumnBorders withRowBorders={false}>
+        <Table
+            className={styles.table}
+            highlightOnHover
+            withTableBorder
+            striped
+            withColumnBorders
+            withRowBorders={false}
+        >
             <Table.Thead>
                 <Table.Tr>
                     <Table.Th>Id</Table.Th>

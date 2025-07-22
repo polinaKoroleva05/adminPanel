@@ -34,6 +34,7 @@ export default function MainUsersPage() {
     const [successAuth, setSuccessAuth] = useState(false)
     const {logoutMutation} = getAuthQueryMiddleware();
     const navigate = useNavigate();
+    const [active, setActive] = useState(0);
 
     useEffect(() => {
         if (isLoading === false && isError) {
@@ -112,6 +113,7 @@ export default function MainUsersPage() {
                 </AppShell.Header>
                 <AppShell.Navbar p='md'>
                     <NavLink
+                    active={0 === active}
                         styles={{
                             label: {fontSize: '1.05rem'}
                         }}
@@ -119,8 +121,10 @@ export default function MainUsersPage() {
                         component={Link}
                         to='/'
                         leftSection={<HomeIcon />}
+                        onClick={() => setActive(2)}
                     />
                     <NavLink
+                    active={1 === active}
                         styles={{
                             label: {fontSize: '1.05rem'}
                         }}
@@ -128,6 +132,7 @@ export default function MainUsersPage() {
                         component={Link}
                         to='/user/create/mantine'
                         leftSection={<CreateUserIcon />}
+                        onClick={() => setActive(1)}
                     >
                         {/* <NavLink
                             styles={{
