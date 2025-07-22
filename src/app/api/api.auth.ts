@@ -8,6 +8,10 @@ const AuthService = {
     
     logout() {
         return instance.post("/api/v1/auth/logout")
+    },
+
+    checkAuth(){
+        return instance.get("/api/v1/auth/me").then(res=>res.data)
     }
 }
 

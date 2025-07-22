@@ -1,24 +1,34 @@
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {AuthService} from '@/app/api';
 
 
-export function getAuthQueryMiddleware(callback: (value: boolean)=>void) {
-    const {mutate: loginMutation, isPending: isLoginLoading, isSuccess: isSuccessLogin, ...allf} = useMutation({
+export function getAuthQueryMiddleware() {
+    const client = useQueryClient();
+    const {mutate: loginMutation, isPending: isLoginLoading, isSuccess: isSuccessLogin} = useMutation({
         mutationFn: AuthService.login,
 
         onSuccess: (response) => {
-            console.log(response);
-            callback(true)
+            client.setQueryData(['auth'], response);
         },
         onError: (error) => {
             console.log('Ошибка авторизации: ' + error.message);
         }
     });
-    console.log(allf)
+
+    const {mutate: logoutMutation} = useMutation({
+        mutationFn: AuthService.logout,
+        onSuccess: () => {
+            client.invalidateQueries({queryKey: ['auth']});
+        },
+        onError: (error) => {
+            console.log('Ошибка выхода из аккаунта: ' + error.message);
+        }
+    });
     
     return {
         loginMutation,
         isLoginLoading,
-        isSuccessLogin
+        isSuccessLogin,
+        logoutMutation
     };
 }

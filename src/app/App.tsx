@@ -12,13 +12,11 @@ import {MainUsersPage} from '@pages/mainUsersPage';
 import {EditUserPage} from '@/pages/editUserPage';
 import {LoginPage} from '@pages/loginPage';
 import AllUsersPage from '@/pages/allUsersPage/AllUsersPage';
-import {AuthContextProvider} from '@/app/taskStore';
 
 function App() {
     return (
         <MantineProvider>
             <ModalsProvider>
-                <AuthContextProvider>
                     <QueryClientProvider client={client}>
                         <Routes>
                             <Route path='/' element={<MainUsersPage />}>
@@ -35,7 +33,6 @@ function App() {
                             <Route path='/login' element={<LoginPage />} />
                         </Routes>
                     </QueryClientProvider>
-                </AuthContextProvider>
             </ModalsProvider>
         </MantineProvider>
     );
