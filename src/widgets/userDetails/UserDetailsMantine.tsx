@@ -11,7 +11,6 @@ import {
 import {DatePickerInput} from '@mantine/dates';
 import {useForm} from '@mantine/form';
 import styles from './UserDetails.module.css';
-import {format} from 'date-fns';
 
 /**
  * A functional React component that displays form filled with task data, allows you to edit fields.
@@ -50,11 +49,15 @@ export default function userDetailsMantine({
             name: (value) =>
                 value.length < 64 && value.length > 0
                     ? null
-                    : "Name can't be empty and more 64 symbols",
+                    : "Name can't be empty or more 64 symbols",
             surName: (value) =>
                 value.length < 64 && value.length > 0
                     ? null
-                    : "Surname can't be empty and more 64 symbols",
+                    : "Surname can't be empty pr more 64 symbols",
+            fullName: (value) =>
+                value.length < 130 && value.length > 0
+                    ? null
+                    : "Fullname can't be empty or more 130 symbols",
             password: (value) =>
                 value == undefined || value.length > 0
                     ? null
@@ -63,7 +66,7 @@ export default function userDetailsMantine({
                 value === values.password ? null : 'Password did not match',
 
             email: (value) =>
-                /^\S+@\S+$/.test(value) ? null : 'Invalid email',
+                /^\S+@\S+.\S+$/.test(value) ? null : 'Invalid email',
             telephone: (value) =>
                 value == undefined || /^(\+7|8)[89]\d{9}$/.test(value)
                     ? null

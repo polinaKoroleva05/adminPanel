@@ -64,7 +64,7 @@ export default function UsersTable({users}: {users: UserInterface[]}) {
     ));
 
     return (
-        <Table>
+        <Table highlightOnHover withTableBorder striped withColumnBorders withRowBorders={false}>
             <Table.Thead>
                 <Table.Tr>
                     <Table.Th>Id</Table.Th>

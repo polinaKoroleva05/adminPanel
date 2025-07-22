@@ -1,8 +1,11 @@
 import {useAuthContext} from '@/app/taskStore';
-import {AppShell, Burger, Button, Group} from '@mantine/core';
+import {AppShell, Burger, Group, NavLink, Text} from '@mantine/core';
 import {useDisclosure} from '@mantine/hooks';
 import {useEffect} from 'react';
 import {Link, Outlet, useNavigate} from 'react-router';
+import HomeIcon from '@shared/ui/home.svg?react';
+import CreateUserIcon from '@shared/ui/createUser.svg?react';
+import LogOutIcon from '@shared/ui/logout.svg?react';
 
 export default function MainUsersPage() {
     const [mobileOpened, {toggle: toggleMobile}] = useDisclosure();
@@ -43,23 +46,31 @@ export default function MainUsersPage() {
                         visibleFrom='sm'
                         size='sm'
                     />
-                    Admin Panel Siriur
-                    <Button
-                        variant='outline'
-                        color='#8c8c8cff'
-                        size='xs'
-                        radius='sm'
-                        onClick={handleLogout}
-                    >
-                        Log out
-                    </Button>
+                    <Text size='xl' fw={500}>
+                        Admin Panel Siriur
+                    </Text>
                 </Group>
             </AppShell.Header>
             <AppShell.Navbar p='md'>
-                <Link to='/'>Main</Link>
-                <Link to='/user/edit/mantine'>edit mantine</Link>
-                <Link to='/user/create/mantine'>create mantine</Link>
-                <Link to='/login'>login</Link>
+                <NavLink
+                    label='Main'
+                    component={Link}
+                    to='/'
+                    leftSection={<HomeIcon />}
+                />
+                <NavLink
+                    label='Create user'
+                    component={Link}
+                    to='/user/create/mantine'
+                    leftSection={<CreateUserIcon />}
+                />
+                <NavLink
+                    fw={500}
+                    label='Log out'
+                    component='button'
+                    onClick={handleLogout}
+                    leftSection={<LogOutIcon />}
+                />
             </AppShell.Navbar>
             <AppShell.Main>
                 <Outlet />
