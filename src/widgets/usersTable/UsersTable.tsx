@@ -1,18 +1,20 @@
-import { getUserQueryMiddleware } from '@/app/taskStore';
+import {getUserQueryMiddleware} from '@/app/taskStore';
 import {Button, Table} from '@mantine/core';
 import type {UserInterface} from '@shared/model/types';
-import {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
+import DeleteIcon from '@shared/ui/delete.svg?react';
+import EditIcon from '@shared/ui/edit.svg?react';
+import styles from './usersTable.module.css';
 
 export default function UsersTable({users}: {users: UserInterface[]}) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const {deleteUserMutation} = getUserQueryMiddleware();
     console.log(users);
     function onEdit(id: string) {
-        navigate(`/user/edit/${id}/mantine`)
+        navigate(`/user/edit/${id}/mantine`);
     }
     function onDelete(id: string) {
-        deleteUserMutation(id)
+        deleteUserMutation(id);
     }
     const rows = users.map((user) => (
         <Table.Tr key={user.id}>
@@ -37,10 +39,26 @@ export default function UsersTable({users}: {users: UserInterface[]}) {
                       : 'Not specified'}
             </Table.Td>
             <Table.Td>
-                <Button onClick={()=>onEdit(user.id)}>ed</Button>
+                <Button
+                    variant='outline'
+                    color='#8c8c8cff'
+                    size='xs'
+                    radius='sm'
+                    onClick={() => onEdit(user.id)}
+                >
+                    <EditIcon className={styles.iconEdit} />
+                </Button>
             </Table.Td>
             <Table.Td>
-                <Button onClick={()=>onDelete(user.id)}>del</Button>
+                <Button
+                    variant='outline'
+                    color='#8c8c8cff'
+                    size='xs'
+                    radius='sm'
+                    onClick={() => onDelete(user.id)}
+                >
+                    <DeleteIcon className={styles.iconDelete} />
+                </Button>
             </Table.Td>
         </Table.Tr>
     ));

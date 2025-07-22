@@ -1,6 +1,6 @@
 import {Route, Routes, useNavigate, useParams} from 'react-router';
 import {UserDetailsMantine} from '@widgets/userDetails';
-import type {TaskInterface, UserCreateInterface, UserInterface} from '@/shared/model/types';
+import type {UserCreateInterface} from '@/shared/model/types';
 import {getUserQueryMiddleware} from '@/app/taskStore/userQueryMiddleware';
 import {useIdUserQuery} from '@/app/taskStore';
 import {Loader} from '@mantine/core';

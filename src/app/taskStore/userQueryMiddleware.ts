@@ -1,20 +1,10 @@
 import {useQueryClient} from '@tanstack/react-query';
 import {useMutation} from '@tanstack/react-query';
-import {AuthService, UserService} from '@/app/api';
+import {UserService} from '@/app/api';
 
 
 export function getUserQueryMiddleware() {
     const client = useQueryClient();
-    const {mutate: loginMutation, isPending: isLoginLoading} = useMutation({
-        mutationFn: AuthService.login,
-
-        onSuccess: (response) => {
-            console.log(response);
-        },
-        onError: (error) => {
-            console.log('Ошибка авторизации: ' + error.message);
-        }
-    });
     const {mutate: createUserMutation} = useMutation({
         mutationFn: UserService.createUser,
         onSuccess: () => {
@@ -43,8 +33,6 @@ export function getUserQueryMiddleware() {
         }
     });
     return {
-        loginMutation,
-        isLoginLoading,
         createUserMutation,
         editUserMutation,
         deleteUserMutation

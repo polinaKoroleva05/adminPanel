@@ -1,3 +1,5 @@
 export {getUserQueryMiddleware} from './userQueryMiddleware'
+export {getAuthQueryMiddleware} from './authQueryMiddleware'
 export {useIdUserQuery} from './useIdUserQuery'
 export {useUsersQuery} from './useUsersQuery'
+export {useAuthContext, AuthContextProvider} from './authContext'
