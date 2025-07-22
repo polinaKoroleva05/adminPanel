@@ -26,6 +26,7 @@ export interface UserInterface {
     [key: string]: string | number | undefined | null | boolean
     id: number | null,
     name: string;
+    surName: string;
     password: string;
     fullName: string;
     email: string;
