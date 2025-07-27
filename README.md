@@ -16,6 +16,10 @@
 2. Выполните для установки зависимостей: `npm install`
 3. Запустите: `npm run dev`
 
+Дефолтная учетка:
+- email - admin@inno.tech 
+- password - admin
+
 Использованные технологии:
 1. React + TypeScript
 2. React Router v6
