@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css'
 import {MantineProvider} from '@mantine/core';
 import './App.css';
 import {Route, Routes} from 'react-router';
@@ -12,14 +13,16 @@ import {MainUsersPage} from '@pages/mainUsersPage';
 import {EditUserPage} from '@/pages/editUserPage';
 import {LoginPage} from '@pages/loginPage';
 import AllUsersPage from '@/pages/allUsersPage/AllUsersPage';
+import { Notifications } from '@mantine/notifications';
 
 function App() {
     return (
         <MantineProvider>
+            <Notifications/>
             <ModalsProvider>
                     <QueryClientProvider client={client}>
                         <Routes>
-                            <Route path='/' element={<MainUsersPage />}>
+                            {/* <Route path='/' element={<MainUsersPage />}>
                                 <Route path='/' element={<AllUsersPage />} />
                                 <Route
                                     path='/user/edit/:id/*'
@@ -29,7 +32,7 @@ function App() {
                                     path='/user/create/*'
                                     element={<CreateUserPage />}
                                 />
-                            </Route>
+                            </Route> */}
                             <Route path='/login' element={<LoginPage />} />
                         </Routes>
                     </QueryClientProvider>

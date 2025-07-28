@@ -1,16 +1,23 @@
+import {SegmentedControl} from '@mantine/core';
 import {useTranslation} from 'react-i18next';
 
-export default function LanguageSwitcher(){
+export default function LanguageSwitcher() {
     const {i18n} = useTranslation();
 
-    const changeLanguage = (lng: 'en' | 'ru') => {
-        i18n.changeLanguage(lng);
+    const changeLanguage = (lng: string) => {
+        if(lng == 'en' || lng=='ru'){
+            i18n.changeLanguage(lng);
+        }
     };
 
     return (
-        <div>
-            <button onClick={() => changeLanguage('en')}>en</button>
-            <button onClick={() => changeLanguage('ru')}>ru</button>
-        </div>
+        <SegmentedControl
+            value={i18n.language}
+            onChange={changeLanguage}
+            data={[
+                {label: 'en', value: 'en'},
+                {label: 'ru', value: 'ru'}
+            ]}
+        />
     );
-};
+}

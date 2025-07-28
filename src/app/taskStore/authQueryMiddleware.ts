@@ -4,7 +4,7 @@ import {AuthService} from '@/app/api';
 
 export function getAuthQueryMiddleware() {
     const client = useQueryClient();
-    const {mutate: loginMutation, isPending: isLoginLoading, isSuccess: isSuccessLogin} = useMutation({
+    const {mutate: loginMutation, isPending: isLoginLoading, isSuccess: isSuccessLogin, ...all} = useMutation({
         mutationFn: AuthService.login,
 
         onSuccess: (response) => {
@@ -28,6 +28,7 @@ export function getAuthQueryMiddleware() {
     return {
         loginMutation,
         isLoginLoading,
+        all,
         isSuccessLogin,
         logoutMutation
     };
