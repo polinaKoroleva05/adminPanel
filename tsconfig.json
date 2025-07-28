@@ -30,7 +30,8 @@
             "@pages/*": ["src/pages/*"],
             "@widgets/*": ["src/widgets/*"],
             "@shared/*": ["src/shared/*"],
-            "@store/*": ["src/app/taskStore/*"]
+            "@store/*": ["src/app/taskStore/*"],
+            "@i18n/*": ["src/app/i18n/*"]
         }
     },
     "files": [],

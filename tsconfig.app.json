@@ -31,5 +31,5 @@
             "@store/*": ["src/app/taskStore/*"]
         }
   },
-  "include": ["src"]
+  "include": ["src", "src/i18n.d.ts", "LanguageSwitcher.tsx"]
 }

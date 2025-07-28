@@ -1,0 +1,7 @@
+{
+    "loaderMessage": "Checking auth...",
+    "email": "Email",
+    "password": "Password",
+    "appealLogin": "Please, log in:",
+    "submit": "Login"
+}

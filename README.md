@@ -28,5 +28,6 @@
 5. UI-фреймворк: Mantine
 6. Инструменты стилизации:CSS Modules
 7. Менеджер форм mantine/form
+8. i18next для локализации
 
 В качестве API использовался: [https://github.com/Pardeg/forms-server](https://github.com/Pardeg/forms-server)

@@ -1,0 +1,8 @@
+{
+    "appTitle": "Admin Panel Siriur",
+    "mainButton": "Main",
+    "createUserButton": "Create user",
+    "logoutButton": "Log out",
+    "toggleColorSheme": "Toggle color scheme",
+    "loaderMessage": "Checking auth..."
+}

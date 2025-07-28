@@ -1,0 +1,8 @@
+{
+    "appTitle": "Панель управления Siriur",
+    "mainButton": "Главная",
+    "createUserButton": "Добавить пользователя",
+    "logoutButton": "Выйти",
+    "toggleColorSheme": "Переключить тему",
+    "loaderMessage": "Проверка авторизации..."
+}

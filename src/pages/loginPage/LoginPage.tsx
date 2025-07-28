@@ -1,12 +1,12 @@
 import {useForm} from '@mantine/form';
 import styles from './loginPage.module.css';
 import {Button, Paper, TextInput, Text, Loader} from '@mantine/core';
-import {
-    getAuthQueryMiddleware,
-    useAuthQuery
-} from '@/app/taskStore';
+import {getAuthQueryMiddleware, useAuthQuery} from '@/app/taskStore';
 import {useNavigate} from 'react-router';
 import {useEffect, useState} from 'react';
+import {LanguageSwitcher} from '@widgets/languageSwitcher';
+import {useTranslation} from 'react-i18next';
+import '@/app/i18n/i18n';
 
 export default function LoginPage() {
     const {loginMutation, isLoginLoading, isSuccessLogin} =
@@ -30,13 +30,9 @@ export default function LoginPage() {
         initialValues: {
             password: '',
             email: ''
-        },
-
-        validate: {
-            email: (value) =>
-                value.length < 64 ? null : "Name can't be more 64 symbols"
         }
     });
+    const {t} = useTranslation('login');
     function onLogin(loginData: {email: string; password: string}) {
         loginMutation(loginData);
     }
@@ -44,30 +40,31 @@ export default function LoginPage() {
         return (
             <>
                 <Loader />
-                <p>Check auth...</p>
+                <p>{t('loaderMessage')}</p>
             </>
         );
     } else {
         return (
             <div className={styles.page}>
+                <LanguageSwitcher />
                 <Paper className={styles.form} shadow='md' radius='md'>
                     <Text fw={500} ta='center'>
-                        Please log in
+                        {t('appealLogin')}
                     </Text>
                     <form onSubmit={form.onSubmit(onLogin)}>
                         <TextInput
-                            label='Email'
+                            label={t('email')}
                             key={form.key('email')}
                             {...form.getInputProps('email')}
                         />
                         <TextInput
-                            label='Password'
+                            label={t('password')}
                             key={form.key('password')}
                             {...form.getInputProps('password')}
                         />
 
                         <Button className={styles.button} type='submit'>
-                            Login
+                            {t('submit')}
                         </Button>
                     </form>
                 </Paper>

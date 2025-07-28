@@ -22,6 +22,8 @@ import SunIcon from '@shared/ui/sun.svg?react';
 import MoonIcon from '@shared/ui/moon.svg?react';
 import StarIcon from '@shared/ui/star.svg?react';
 import styles from './mainUsersPage.module.css';
+import { LanguageSwitcher } from '@/widgets/languageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 export default function MainUsersPage() {
     const {setColorScheme} = useMantineColorScheme();
@@ -35,6 +37,7 @@ export default function MainUsersPage() {
     const {logoutMutation} = getAuthQueryMiddleware();
     const navigate = useNavigate();
     const [active, setActive] = useState(0);
+    const {t} = useTranslation('mainPage');
 
     useEffect(() => {
         if (isLoading === false && isError) {
@@ -55,7 +58,7 @@ export default function MainUsersPage() {
         return (
             <>
                 <Loader />
-                <p>Check auth...</p>
+                <p>{t('loaderMessage')}</p>
             </>
         );
     }else{
@@ -86,11 +89,12 @@ export default function MainUsersPage() {
                                 size='sm'
                             />
                             <Text size='xl' fw={500}>
-                                Admin Panel Siriur
+                                {t('appTitle')}
                             </Text>
                             <StarIcon />
                         </Group>
                         <Group>
+                            <LanguageSwitcher />
                             <Text>{dataUser.email}</Text>
                             <ActionIcon
                                 variant='outline'
@@ -100,7 +104,7 @@ export default function MainUsersPage() {
                                         ? setColorScheme('light')
                                         : setColorScheme('dark')
                                 }
-                                title='Toggle color scheme'
+                                title={t('toggleColorSheme')}
                             >
                                 {mantineTheme == 'dark' ? (
                                     <SunIcon style={{width: 18, height: 18}} />
@@ -117,7 +121,7 @@ export default function MainUsersPage() {
                         styles={{
                             label: {fontSize: '1.05rem'}
                         }}
-                        label='Main'
+                        label={t('mainButton')}
                         component={Link}
                         to='/'
                         leftSection={<HomeIcon />}
@@ -128,7 +132,7 @@ export default function MainUsersPage() {
                         styles={{
                             label: {fontSize: '1.05rem'}
                         }}
-                        label='Create user'
+                        label={t('createUserButton')}
                         component={Link}
                         to='/user/create/mantine'
                         leftSection={<CreateUserIcon />}
@@ -162,7 +166,7 @@ export default function MainUsersPage() {
                         }}
                         className={styles.navLink}
                         fw={500}
-                        label='Log out'
+                        label={t('logoutButton')}
                         component='button'
                         onClick={handleLogout}
                         leftSection={<LogOutIcon />}
