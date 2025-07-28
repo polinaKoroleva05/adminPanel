@@ -6,19 +6,18 @@ import autoprefixer from 'autoprefixer';
 
 // https://vite.dev/config/
 export default defineConfig({
+    plugins: [react(), svgr(), tsconfigPaths()],
     server: {
-        allowedHosts: ['localhost'],
-        port: 5173,
         proxy: {
             '/api': {
                 changeOrigin: true,
-                secure: false,
-                target: 'http://localhost:4000'
+                secure: true,
+                 
+                target: 'https://forms-server.vercel.app/'
             }
         },
         strictPort: true
     },
-    plugins: [react(), svgr(), tsconfigPaths()],
     css: {
         postcss: {
             plugins: [autoprefixer]
