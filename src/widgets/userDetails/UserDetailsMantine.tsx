@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import {DatePickerInput} from '@mantine/dates';
 import {useForm} from '@mantine/form';
-import styles from './UserDetails.module.css';
+import styles from './userDetails.module.css';
 
 /**
  * A functional React component that displays form filled with task data, allows you to edit fields.

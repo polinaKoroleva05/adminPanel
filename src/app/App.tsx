@@ -22,7 +22,7 @@ function App() {
             <ModalsProvider>
                     <QueryClientProvider client={client}>
                         <Routes>
-                            {/* <Route path='/' element={<MainUsersPage />}>
+                            <Route path='/' element={<MainUsersPage />}>
                                 <Route path='/' element={<AllUsersPage />} />
                                 <Route
                                     path='/user/edit/:id/*'
@@ -32,7 +32,7 @@ function App() {
                                     path='/user/create/*'
                                     element={<CreateUserPage />}
                                 />
-                            </Route> */}
+                            </Route>
                             <Route path='/login' element={<LoginPage />} />
                         </Routes>
                     </QueryClientProvider>

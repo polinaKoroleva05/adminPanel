@@ -3,7 +3,7 @@ import styles from './loginPage.module.css';
 import {Button, Paper, TextInput, Text, Loader} from '@mantine/core';
 import {getAuthQueryMiddleware, useAuthQuery} from '@/app/taskStore';
 import {useNavigate} from 'react-router';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {LanguageSwitcher} from '@widgets/languageSwitcher';
 import {useTranslation} from 'react-i18next';
 import '@/app/i18n/i18n';
@@ -71,6 +71,13 @@ export default function LoginPage() {
                     title: 'Login error',
                     message: 'Invalid password or email',
                     color: 'red'
+                });
+                break;
+            case 404:
+                notifications.show({
+                    title: 'Login error',
+                    message: 'Cant fetch server',
+                    color: 'gray'
                 });
         }
     }
