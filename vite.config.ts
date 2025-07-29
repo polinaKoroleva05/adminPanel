@@ -12,7 +12,6 @@ export default defineConfig({
             '/api': {
                 changeOrigin: true,
                 secure: true,
-                 
                 target: 'https://forms-server.vercel.app/'
             }
         },

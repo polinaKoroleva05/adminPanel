@@ -164,8 +164,8 @@ export default function userDetailsMantine({
                 />
                 <Checkbox
                     label='User agreement'
-                    key={form.key('userAgreement ')}
-                    {...form.getInputProps('userAgreement ')}
+                    key={form.key('userAgreement')}
+                    {...form.getInputProps('userAgreement')}
                 />
 
                 <Group justify='flex-end' mt='md'>
