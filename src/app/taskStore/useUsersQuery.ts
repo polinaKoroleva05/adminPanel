@@ -5,6 +5,6 @@ export const useUsersQuery = () => {
     return useQuery({
         queryFn: UserService.get,
         queryKey: ['allUsers'],
-        staleTime: 5000
+        staleTime: 1000 * 60
     })
 }

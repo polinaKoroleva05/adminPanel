@@ -5,7 +5,7 @@ export const useAuthQuery = () => {
     return useQuery({
         queryFn: AuthService.checkAuth,
         queryKey: ['auth'],
-        // staleTime: 5000,
+        staleTime: 1000 * 60,
         retry: false
         
     });

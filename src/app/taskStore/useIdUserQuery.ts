@@ -5,7 +5,7 @@ export const useIdUserQuery = (id: string) => {
     return useQuery({
         queryFn: () => UserService.getById(id),
         queryKey: ['user', id],
-        staleTime: 5000,
+        staleTime: 1000 * 60,
         retry: (failureCount, error) => {
             console.log(error)
             if (error.message === 'Not Found') {
