@@ -1,7 +1,7 @@
 # Панель администрирования пользователей
 Для ознакомления проект развернут на Vercel:
 
-admin-panel-five-bice.vercel.app
+[https://admin-panel-five-bice.vercel.app](https://admin-panel-five-bice.vercel.app/login)
 
 При отсутствии активной авторизации пользователь попадает на страницу авторизации:
 ![Авторизация](https://github.com/polinaKoroleva05/adminPanel/blob/main/public/login.png)
