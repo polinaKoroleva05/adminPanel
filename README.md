@@ -34,4 +34,4 @@ admin-panel-five-bice.vercel.app
 8. i18next для локализации
 9. Vercel для деплоя
 
-В качестве API использовался: [https://github.com/Pardeg/forms-server](https://github.com/Pardeg/forms-server)
+В качестве API использовался: [https://github.com/polinaKoroleva05/forms-server](https://github.com/polinaKoroleva05/forms-server)
