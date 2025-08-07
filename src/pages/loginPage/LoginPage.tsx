@@ -3,29 +3,11 @@ import styles from './loginPage.module.css';
 import {Button, Paper, TextInput, Text, Loader} from '@mantine/core';
 import {getAuthQueryMiddleware, useAuthQuery} from '@/app/taskStore';
 import {useNavigate} from 'react-router';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {LanguageSwitcher} from '@widgets/languageSwitcher';
 import {useTranslation} from 'react-i18next';
 import '@/app/i18n/i18n';
 import {notifications} from '@mantine/notifications';
-
-
-function useTraceUpdate(props: any) {
-  const prev = useRef(props);
-  useEffect(() => {
-    const changedProps = Object.entries(props).reduce((ps: any, [k, v]) => {
-      if (prev.current[k] !== v) {
-        console.log(prev.current[k], v)
-        ps[k] = [prev.current[k], v];
-      }
-      return ps;
-    }, {});
-    if (Object.keys(changedProps).length > 0) {
-      console.log('Changed props:', changedProps);
-    }
-    prev.current = props;
-  });
-}
 
 
 export default function LoginPage() {
@@ -36,7 +18,7 @@ export default function LoginPage() {
         return useAuthQuery();
     }, []);
     
-    const {loginMutation, isLoginLoading, all, isSuccessLogin} =
+    const {loginMutation, all} =
     getQueryMiddlewareMemo();
     const {isLoading, isError} = useAuthQueryMemo();
     
@@ -61,7 +43,6 @@ export default function LoginPage() {
             email: ''
         }
     });
-    useTraceUpdate({form, all, loginMutation, isLoginLoading, isSuccessLogin, getQueryMiddlewareMemo, useAuthQueryMemo, isLoading, isError, needAuth});
     if (all.error) {
         console.log('in notif', needAuth)
         let axiosError: any = all.error;
